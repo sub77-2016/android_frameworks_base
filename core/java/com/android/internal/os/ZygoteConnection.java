@@ -202,6 +202,10 @@ class ZygoteConnection {
 
             checkTime(startTime, "zygoteConnection.runOnce: apply security policies");
 
+            if (parsedArgs.invokeWith == null) {
+                parsedArgs.invokeWith = "exec";
+            }
+
             int[][] rlimits = null;
 
             if (parsedArgs.rlimits != null) {

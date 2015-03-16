@@ -72,9 +72,6 @@ public class WrapperInit {
                 }
             }
 
-            // Mimic Zygote preloading.
-            ZygoteInit.preload();
-
             // Launch the application.
             String[] runtimeArgs = new String[args.length - 2];
             System.arraycopy(args, 2, runtimeArgs, 0, runtimeArgs.length);

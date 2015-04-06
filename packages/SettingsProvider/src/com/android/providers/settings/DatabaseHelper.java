@@ -1845,13 +1845,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             upgradeVersion = 114;
         }
 
-        // From here on out, we can assume the user is coming from CM and will have these rows
-        if (upgradeVersion < 115) {
-            moveSettingsToNewTable(db, TABLE_SYSTEM, TABLE_SECURE,
-                    new String[] { Settings.Secure.STATS_COLLECTION }, true);
-            upgradeVersion = 115;
-        }
-
         if (upgradeVersion < 116) {
             moveSettingsToNewTable(db, TABLE_SYSTEM, TABLE_SECURE,
                     new String[] { Settings.Secure.VOLUME_LINK_NOTIFICATION }, true);
@@ -2660,9 +2653,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
             loadIntegerSetting(stmt, Settings.Secure.SLEEP_TIMEOUT,
                     R.integer.def_sleep_timeout);
-
-            loadBooleanSetting(stmt, Settings.Secure.STATS_COLLECTION,
-                    R.bool.def_cm_stats_collection);
 
             loadBooleanSetting(stmt, Settings.Secure.ADVANCED_MODE,
                     com.android.internal.R.bool.config_advancedSettingsMode);

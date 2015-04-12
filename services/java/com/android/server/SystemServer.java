@@ -57,7 +57,6 @@ import android.util.EventLog;
 import android.util.Log;
 import android.util.Slog;
 import android.view.WindowManager;
-import android.webkit.WebViewFactory;
 
 import com.android.internal.R;
 import com.android.internal.os.BinderInternal;
@@ -104,7 +103,6 @@ import com.android.server.twilight.TwilightService;
 import com.android.server.usage.UsageStatsService;
 import com.android.server.usb.UsbService;
 import com.android.server.wallpaper.WallpaperManagerService;
-import com.android.server.webkit.WebViewUpdateService;
 import com.android.server.wm.WindowManagerService;
 
 import dalvik.system.VMRuntime;
@@ -402,9 +400,6 @@ public final class SystemServer {
         mSystemServiceManager.startService(UsageStatsService.class);
         mActivityManagerService.setUsageStatsManager(
                 LocalServices.getService(UsageStatsManagerInternal.class));
-
-        // Tracks whether the updatable WebView is in a ready state and watches for update installs.
-        mSystemServiceManager.startService(WebViewUpdateService.class);
     }
 
     /**
@@ -1230,9 +1225,6 @@ public final class SystemServer {
                 } catch (Throwable e) {
                     reportWtf("observing native crashes", e);
                 }
-
-                Slog.i(TAG, "WebViewFactory preparation");
-                WebViewFactory.prepareWebViewInSystemServer();
 
                 try {
                     startSystemUi(context);
